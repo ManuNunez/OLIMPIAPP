@@ -1,0 +1,106 @@
+-- Table: USERS
+CREATE TABLE USERS (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    curp VARCHAR(18) UNIQUE NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    school_id INTEGER REFERENCES SCHOOLS(id),
+    role_id INTEGER REFERENCES ROLES(id),
+    created_at TIMESTAMP DEFAULT now()
+);
+
+-- Table: ROLES
+CREATE TABLE ROLES (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL,
+    description TEXT
+);
+
+-- Table: SCHOOLS
+CREATE TABLE SCHOOLS (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    cct VARCHAR(20) UNIQUE NOT NULL,
+    longitude DECIMAL(9,6),
+    latitude DECIMAL(9,6)
+);
+
+-- Table: CAMPUS
+CREATE TABLE CAMPUS (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    address VARCHAR(255)
+);
+
+-- Table: CONTESTS
+CREATE TABLE CONTESTS (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+-- Table: CONTEST_CAMPUS
+CREATE TABLE CONTEST_CAMPUS (
+    id SERIAL PRIMARY KEY,
+    contest_id INTEGER REFERENCES CONTESTS(id),
+    campus_id INTEGER REFERENCES CAMPUS(id)
+);
+
+-- Table: CERTIFICATES
+CREATE TABLE CERTIFICATES (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    issued_at TIMESTAMP DEFAULT now(),
+    user_id INTEGER REFERENCES USERS(id),
+    type VARCHAR(50),
+    rank INTEGER
+);
+
+-- Table: ENROLLMENTS
+CREATE TABLE ENROLLMENTS (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES USERS(id),
+    contest_id INTEGER REFERENCES CONTESTS(id),
+    level VARCHAR(50),
+    school_id INTEGER REFERENCES SCHOOLS(id),
+    score DECIMAL(5,2),
+    certificate_id INTEGER REFERENCES CERTIFICATES(id),
+    coach_id INTEGER REFERENCES USERS(id),
+    enrolled_at TIMESTAMP DEFAULT now()
+);
+
+-- Table: POSTS
+CREATE TABLE POSTS (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    author_id INTEGER REFERENCES USERS(id),
+    created_at TIMESTAMP DEFAULT now(),
+    updated_at TIMESTAMP,
+    published BOOLEAN DEFAULT false
+);
+
+-- Table: COMMENTS
+CREATE TABLE COMMENTS (
+    id SERIAL PRIMARY KEY,
+    content TEXT NOT NULL,
+    post_id INTEGER REFERENCES POSTS(id),
+    user_id INTEGER REFERENCES USERS(id),
+    created_at TIMESTAMP DEFAULT now()
+);
+
+-- Table: CATEGORIES
+CREATE TABLE CATEGORIES (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL,
+    description TEXT
+);
+
+-- Table: POST_CATEGORIES
+CREATE TABLE POST_CATEGORIES (
+    post_id INTEGER REFERENCES POSTS(id),
+    category_id INTEGER REFERENCES CATEGORIES(id),
+    PRIMARY KEY (post_id, category_id)
+);
