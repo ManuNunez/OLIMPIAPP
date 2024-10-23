@@ -1,13 +1,13 @@
 from flask import Flask
-from app.routes.home import home_bp
-# from app.routes.admin import admin_bp
-# from app.routes.auth import auth_bp
-# from app.routes.public import public_bp
-# from app.routes.user import user_bp
+from app.routes.home import init_home
+# from app.routes.admin import init_admin
+# from app.routes.auth import init_auth
+# from app.routes.public import init_public
+# from app.routes.user import init_user
 
 def init_app(app: Flask):
-    app.register_blueprint(home_bp)
-    # app.register_blueprint(admin_bp)
-    # app.register_blueprint(auth_bp)
-    # app.register_blueprint(public_bp)
-    # app.register_blueprint(user_bp)
+    init_home(app)
+    # init_admin(app)
+    # init_auth(app)
+    # init_public(app)
+    # init_user(app)
