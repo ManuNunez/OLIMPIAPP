@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from app.config import Config
+from app.config import get_config
 from app.routes import init_app
 
 db = SQLAlchemy()
@@ -11,7 +11,7 @@ mail = Mail()
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(get_config())
     
 
   
