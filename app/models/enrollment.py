@@ -5,6 +5,7 @@ class Enrollment(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    code = db.Column(db.String(50), unique=True, nullable=False)
     contest_id = db.Column(db.Integer, db.ForeignKey('contests.id'))
     level = db.Column(db.String(50))
     school_id = db.Column(db.Integer, db.ForeignKey('schools.id'))
