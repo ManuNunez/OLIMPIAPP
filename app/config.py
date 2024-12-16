@@ -23,7 +23,7 @@ class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
 def get_config():
-    debug_mode = os.getenv('FLASK_DEBUG', '0') 
+    debug_mode = os.getenv('FLASK_DEBUG') 
     if debug_mode.lower() in ['1', 'true', 'on']:
         return DevelopmentConfig()
     return ProductionConfig()
