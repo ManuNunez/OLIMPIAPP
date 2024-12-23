@@ -13,3 +13,4 @@ from .post import Post
 from .category import Category
 from .comment import Comment
 from .post_category import PostCategory
+from .user_role import UserRole
