@@ -10,7 +10,6 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     school_id = db.Column(db.Integer, db.ForeignKey('schools.id'))
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
     def __repr__(self):
