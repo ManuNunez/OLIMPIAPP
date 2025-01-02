@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+    <form action="/auth/sign-up" method="POST">
+        <!-- Full Name -->
+        <div class="mb-4">
+            <label for="name" class="block text-sm font-medium">Full Name</label>
+            <input type="text" id="name" name="name" required
+                class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
+                placeholder="Enter your full name" />
+        </div>
+        <!-- CURP -->
+        <div class="mb-4">
+            <label for="curp" class="block text-sm font-medium">CURP</label>
+            <input type="text" id="curp" name="curp" required
+                class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
+                placeholder="Enter your CURP" />
+        </div>
+        <!-- Username -->
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium">Username</label>
+            <input type="text" id="username" name="username" required
+                class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
+                placeholder="Choose a username" />
+        </div>
+        <!-- Email -->
+        <div class="mb-4">
+            <label for="email" class="block text-sm font-medium">Email</label>
+            <input type="email" id="email" name="email" required
+                class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
+                placeholder="Enter your email" />
+        </div>
+        <!-- Confirm Email -->
+        <div class="mb-4">
+            <label for="confirm_email" class="block text-sm font-medium">Confirm Email</label>
+            <input type="email" id="confirm_email" name="confirm_email" required
+                class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
+                placeholder="Confirm your email" />
+        </div>
+        <!-- Password -->
+        <div class="mb-4">
+            <label for="password" class="block text-sm font-medium">Password</label>
+            <input type="password" id="password" name="password" required
+                class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
+                placeholder="Create a password" />
+        </div>
+        <!-- Confirm Password -->
+        <div class="mb-4">
+            <label for="confirm_password" class="block text-sm font-medium">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required
+                class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
+                placeholder="Confirm your password" />
+        </div>
+        <!-- Role Selection -->
+        <div class="mb-4">
+            <label for="role" class="block text-sm font-medium">Role</label>
+            <select id="role" name="role" required
+                class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none">
+                <option value="" disabled selected>Selecciona uno</option>
+                <option value="1">Coach</option>
+                <option value="2">Alumno</option>
+                <option value="3">Ambas</option>
+            </select>
+        </div>
+
+        <!-- School CCT -->
+        <div class="mb-4 relative">
+            <label for="school_cct" class="block text-sm font-medium">CCT de Escuela</label>
+            <input type="text" id="school_cct" name="school_cct" required
+                class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
+                placeholder="Enter the school's CCT" oninput="fetchSchoolSuggestions()" onblur="fetchSchoolName()" />
+            <ul id="school_suggestions" class="absolute bg-gray-700 rounded w-full mt-1 z-10 shadow-lg hidden">
+                <!-- Suggestions will be populated dynamically -->
+            </ul>
+        </div>
+        <!-- School Name -->
+        <div class="mb-4">
+            <label for="school" class="block text-sm font-medium">Escuela</label>
+            <input type="text" id="school" name="school" readonly
+                class="w-full px-4 py-2 mt-1 bg-gray-600 text-gray-400 rounded focus:outline-none"
+                placeholder="School name will appear here" />
+        </div>
+        <!-- Submit Button -->
+        <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-500">
+            Sign Up
+        </button>
+    </form>
+</div>
+
+<script>
+    async function fetchSchoolSuggestions() {
+        const cct = document.getElementById('school_cct').value;
+        const suggestionsList = document.getElementById('school_suggestions');
+        suggestionsList.innerHTML = ''; // Clear previous suggestions
+
+        if (cct.length >= 3) {
+            try {
+                const response = await fetch(`/api/schools?suggest=${cct}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    suggestionsList.classList.remove('hidden');
+                    data.slice(0, 6).forEach(school => {
+                        const suggestionItem = document.createElement('li');
+                        suggestionItem.classList.add('px-4', 'py-2', 'hover:bg-gray-600', 'cursor-pointer');
+                        suggestionItem.textContent = `${school.cct} - ${school.name}`;
+                        suggestionItem.addEventListener('click', () => {
+                            document.getElementById('school_cct').value = school.cct;
+                            document.getElementById('school').value = school.name;
+                            suggestionsList.classList.add('hidden');
+                        });
+                        suggestionsList.appendChild(suggestionItem);
+                    });
+                } else {
+                    suggestionsList.classList.add('hidden');
+                }
+            } catch (error) {
+                suggestionsList.classList.add('hidden');
+            }
+        } else {
+            suggestionsList.classList.add('hidden');
+        }
+    }
+
+    async function fetchSchoolName() {
+        const cct = document.getElementById('school_cct').value;
+        const schoolField = document.getElementById('school');
+
+        if (cct.length >= 5) {
+            try {
+                const response = await fetch(`/api/schools/${cct}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    schoolField.value = data.name || 'School not found';
+                } else {
+                    schoolField.value = 'School not found';
+                }
+            } catch (error) {
+                schoolField.value = 'Error fetching school';
+            }
+        }
+    }
+</script>
+{% endblock %}
