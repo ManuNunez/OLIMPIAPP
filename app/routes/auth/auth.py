@@ -49,7 +49,7 @@ def sign_up():
  
         db.session.add(new_user)
         db.session.commit()
-
+        new_user.add_default_role()
         
 
         flash('Account created successfully!', 'success')
@@ -57,4 +57,7 @@ def sign_up():
 
     return render_template('auth/sign_up.html')
 
+@auth_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    pass
 
