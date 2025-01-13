@@ -38,14 +38,8 @@ def sign_up():
             flash('Username already exists!', 'error')
             return redirect(url_for('auth.sign_up'))
 
-        new_user = User(
-            name=name,
-            curp=curp,
-            username=username,
-            email=email,
-            password_hash=password, 
-            school_id=school.id  
-        )
+        
+        new_user = User(name, curp, username, email, password, school.id)
  
         db.session.add(new_user)
         db.session.commit()
@@ -57,7 +51,19 @@ def sign_up():
 
     return render_template('auth/sign_up.html')
 
+
+
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    pass
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(username=username).first()
+        if not user or not user.check_password(password):
+            flash('Invalid credentials!', 'error')
+            return redirect(url_for('auth.login'))
+        return redirect(url_for('home.index'))
+
+    return render_template('auth/login.html')
 
