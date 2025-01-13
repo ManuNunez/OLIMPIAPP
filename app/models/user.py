@@ -1,5 +1,6 @@
 from . import db
 from .user_role import UserRole
+from werkzeug.security import check_password_hash, generate_password_hash
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -13,12 +14,12 @@ class User(db.Model):
     school_id = db.Column(db.Integer, db.ForeignKey('schools.id'))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     
-    def __init__(self, name, curp, username, email, password_hash, school_id):
+    def __init__(self, name, curp, username, email, password, school_id):
         self.name = name
         self.curp = curp
         self.username = username
         self.email = email
-        self.password_hash = password_hash
+        self.password_hash = generate_password_hash(password)
         self.school_id = school_id
 
     def add_default_role(self):
@@ -31,4 +32,13 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.name}>'
     
+    def __init__(self, name, curp, username, email, password, school_id):
+        self.name = name
+        self.curp = curp
+        self.username = username
+        self.email = email
+        self.password_hash = generate_password_hash(password)
+        self.school_id = school_id
 
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
