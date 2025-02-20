@@ -82,12 +82,21 @@
                 class="w-full px-4 py-2 mt-1 bg-gray-600 text-gray-400 rounded focus:outline-none"
                 placeholder="School name will appear here" />
         </div>
+        <!-- Legal Notice -->
+        <div class="mb-4">
+            <label class="inline-flex items-center">
+            <input type="checkbox" id="legal_notice" name="legal_notice" required
+                class="form-checkbox h-5 w-5 text-blue-600">
+            <span class="ml-2 text-sm">I agree to the <a href="{{ url_for('legal.legal') }}" class="text-blue-500 hover:underline">legal notice</a></span>
+            </label>
+        </div>
         <!-- Submit Button -->
         <button type="submit"
             class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-500">
             Sign Up
         </button>
     </form>
+    <p class="mt-4 text-center">Already have an account? <a href="{{ url_for('auth.login') }}" class="text-blue-500 hover:underline">Log in here</a></p>
 </div>
 
 <script>
