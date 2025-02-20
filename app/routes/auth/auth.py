@@ -61,7 +61,7 @@ def login():
 
         user = User.query.filter_by(username=username).first()
         if not user or not user.check_password(password):
-            flash('Invalid credentials!', 'error')
+            flash('Invalid credentials', 'error')
             return redirect(url_for('auth.login'))
         return redirect(url_for('home.index'))
 

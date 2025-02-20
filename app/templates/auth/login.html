@@ -20,6 +20,24 @@
         </div>
         <button type="submit" class="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Login</button>
     </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    <div class='text-green-800'>
+                        <p>{{ message }}</p>
+                    </div>
+                {% elif category == 'error' %}
+                    <div class='text-red-800 flex text-center'>
+                        
+                            <span>
+                                <svg aria-hidden="true" class="Qk3oof xTjuxe" fill="currentColor" focusable="false" width="16px" height="16px" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
+                            </span>{{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <p class="mt-4 text-center">Don't have an account? <a href="{{ url_for('auth.sign_up') }}" class="text-blue-500 hover:underline">Sign up here</a></p>
 </div>
 {% endblock %}
