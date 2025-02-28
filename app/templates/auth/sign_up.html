@@ -2,60 +2,60 @@
 
 {% block content %}
 <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md mx-auto">
-    <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center">Registrarse</h2>
     <form action="/auth/sign-up" method="POST">
         <!-- Full Name -->
         <div class="mb-4">
-            <label for="name" class="block text-sm font-medium">Full Name</label>
+            <label for="name" class="block text-sm font-medium">Nombre Completo</label>
             <input type="text" id="name" name="name" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
-                placeholder="Enter your full name" />
+                placeholder="Ingresa tu nombre completo" />
         </div>
         <!-- CURP -->
         <div class="mb-4">
             <label for="curp" class="block text-sm font-medium">CURP</label>
             <input type="text" id="curp" name="curp" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
-                placeholder="Enter your CURP" />
+                placeholder="Ingresa tu CURP" />
         </div>
         <!-- Username -->
         <div class="mb-4">
-            <label for="username" class="block text-sm font-medium">Username</label>
+            <label for="username" class="block text-sm font-medium">Nombre de Usuario</label>
             <input type="text" id="username" name="username" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
-                placeholder="Choose a username" />
+                placeholder="Elige un nombre de usuario" />
         </div>
         <!-- Email -->
         <div class="mb-4">
-            <label for="email" class="block text-sm font-medium">Email</label>
+            <label for="email" class="block text-sm font-medium">Correo Electrónico</label>
             <input type="email" id="email" name="email" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
-                placeholder="Enter your email" />
+                placeholder="Ingresa tu correo electrónico" />
         </div>
         <!-- Confirm Email -->
         <div class="mb-4">
-            <label for="confirm_email" class="block text-sm font-medium">Confirm Email</label>
+            <label for="confirm_email" class="block text-sm font-medium">Confirmar Correo Electrónico</label>
             <input type="email" id="confirm_email" name="confirm_email" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
-                placeholder="Confirm your email" />
+                placeholder="Confirma tu correo electrónico" />
         </div>
         <!-- Password -->
         <div class="mb-4">
-            <label for="password" class="block text-sm font-medium">Password</label>
+            <label for="password" class="block text-sm font-medium">Contraseña</label>
             <input type="password" id="password" name="password" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
-                placeholder="Create a password" />
+                placeholder="Crea una contraseña" />
         </div>
         <!-- Confirm Password -->
         <div class="mb-4">
-            <label for="confirm_password" class="block text-sm font-medium">Confirm Password</label>
+            <label for="confirm_password" class="block text-sm font-medium">Confirmar Contraseña</label>
             <input type="password" id="confirm_password" name="confirm_password" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
-                placeholder="Confirm your password" />
+                placeholder="Confirma tu contraseña" />
         </div>
         <!-- Role Selection -->
         <div class="mb-4">
-            <label for="role" class="block text-sm font-medium">Role</label>
+            <label for="role" class="block text-sm font-medium">Rol</label>
             <select id="role" name="role" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none">
                 <option value="" disabled selected>Selecciona uno</option>
