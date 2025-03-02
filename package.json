@@ -1,0 +1,30 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  },
+  "name": "olimpiapp",
+  "version": "1.0.0",
+  "description": "prueba",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "styles_build": "npx tailwindcss -i ./app/static/src/input.css -o ./app/static/dist/output.css --watch",
+    "styles_build_prod": "npx tailwindcss -i ./app/static/src/input.css -o ./app/static/dist/output.css --minify"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManuNunez/OLIMPIAPP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ManuNunez/OLIMPIAPP/issues"
+  },
+  "homepage": "https://github.com/ManuNunez/OLIMPIAPP#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.3"
+  }
+}

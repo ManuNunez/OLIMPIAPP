@@ -2,7 +2,6 @@
 node_modules/
 venv
 package-lock.json
-package.json
 app/__pycache__/
 app/routes/__pycache__/
 app/routes/*/__pycache__/
@@ -10,3 +9,5 @@ app/models/__pycache__/
 app/utils/__pycache__/
 *.sql
 .gitignore
+postcss.config.js
+
