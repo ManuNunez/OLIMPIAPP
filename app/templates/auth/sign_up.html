@@ -2,11 +2,11 @@
 
 {% block content %}
 <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md mx-auto">
-    <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center">Inscribete</h2>
     <form action="/auth/sign-up" method="POST">
         <!-- Full Name -->
         <div class="mb-4">
-            <label for="name" class="block text-sm font-medium">Full Name</label>
+            <label for="name" class="block text-sm font-medium">Nombre completo</label>
             <input type="text" id="name" name="name" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
                 placeholder="ingresa tu nombre completo" />
@@ -20,7 +20,7 @@
         </div>
         <!-- Username -->
         <div class="mb-4">
-            <label for="username" class="block text-sm font-medium">Username</label>
+            <label for="username" class="block text-sm font-medium">Nombre de Usuario</label>
             <input type="text" id="username" name="username" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
                 placeholder="Elige un nombre de usuario" />
@@ -34,21 +34,21 @@
         </div>
         <!-- Confirm Email -->
         <div class="mb-4">
-            <label for="confirm_email" class="block text-sm font-medium">Confirm Email</label>
+            <label for="confirm_email" class="block text-sm font-medium">Confirma tu Email</label>
             <input type="email" id="confirm_email" name="confirm_email" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
                 placeholder="Confirma tu email" />
         </div>
         <!-- Password -->
         <div class="mb-4">
-            <label for="password" class="block text-sm font-medium">Password</label>
+            <label for="password" class="block text-sm font-medium">contraseña</label>
             <input type="password" id="password" name="password" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
                 placeholder="Crea una contraseña" />
         </div>
         <!-- Confirm Password -->
         <div class="mb-4">
-            <label for="confirm_password" class="block text-sm font-medium">Confirm Password</label>
+            <label for="confirm_password" class="block text-sm font-medium">Confirma tu contraseña</label>
             <input type="password" id="confirm_password" name="confirm_password" required
                 class="w-full px-4 py-2 mt-1 bg-gray-700 rounded focus:ring focus:ring-blue-500 focus:outline-none"
                 placeholder="Confirma tu contraseña" />
@@ -87,16 +87,16 @@
             <label class="inline-flex items-center">
             <input type="checkbox" id="legal_notice" name="legal_notice" required
                 class="form-checkbox h-5 w-5 text-blue-600">
-            <span class="ml-2 text-sm">I agree to the <a href="{{ url_for('legal.legal') }}" class="text-blue-500 hover:underline">legal notice</a></span>
+            <span class="ml-2 text-sm">Estoy de acuerdo con el <a href="{{ url_for('legal.legal') }}" class="text-blue-500 hover:underline">Aviso Legal</a></span>
             </label>
         </div>
         <!-- Submit Button -->
         <button type="submit"
             class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-500">
-            Sign Up
+            Inscribete
         </button>
     </form>
-    <p class="mt-4 text-center">Already have an account? <a href="{{ url_for('auth.login') }}" class="text-blue-500 hover:underline">Log in here</a></p>
+    <p class="mt-4 text-center">¿Ya tienes una cuenta? <a href="{{ url_for('auth.login') }}" class="text-blue-500 hover:underline">Inicia sesión aquí</a></p>
 </div>
 
 <script>
